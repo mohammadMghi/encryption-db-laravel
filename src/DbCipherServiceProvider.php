@@ -15,6 +15,8 @@ class DbCipherServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        
+        $this->publishes([
+            __DIR__.'/../config/dbchiper.php' => config_path('dbcipher.php')
+        ],'config');
     }
 }
