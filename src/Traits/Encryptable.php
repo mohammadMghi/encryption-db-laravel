@@ -28,4 +28,9 @@ trait Encryptable
 
         return $value;
     }
+
+    public function setEncryptable($password,$salt)
+    {
+
+    }
 }
