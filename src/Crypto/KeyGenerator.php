@@ -7,14 +7,8 @@ use RuntimeException;
 
 class KeyGenerator
 {   
-    public static function generateKey(string $password, string $base64salt): string
+    public static function generateKey(string $password, string $salt): string
     {
-        $salt = base64_decode($base64salt);
-        
-        if($salt === false) {
-            throw new RuntimeException('Invalid salt');
-        }
-
         $key = sodium_crypto_pwhash(
             32,
             $password,

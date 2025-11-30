@@ -7,16 +7,14 @@ use WhiteStarCode\DbCipher\Facades\Encryption;
 
 trait Encryptable
 {
-    protected $encryptable = []; 
-
     public function setAttribute($key,$value)
-    {
+    { 
         if (in_array($key , $this->encryptable)) {
-            [$key , $salt] = KeyManager::get();
+            [$password , $salt] = KeyManager::get();
 
-            $value = Encryption::encrypt($value,$key,$salt);
+            $value = Encryption::encrypt($value,$password,$salt);
         }
-
+        
         return parent::setAttribute($key,$value);
     }
 
@@ -26,9 +24,9 @@ trait Encryptable
 
         if (in_array($key , $this->encryptable))
         {
-            [$key , $salt] = KeyManager::get();
+            [$password , $salt] = KeyManager::get();
 
-            return Encryption::decrypt($value,$key,$salt);
+            return Encryption::decrypt($value,$password,$salt);
         }
 
         return $value;
