@@ -6,9 +6,9 @@ use WhiteStarCode\DbCipher\Crypto\KeyGenerator;
 
 class EncryptionService
 {
-    public function encrypt($plaintext,$password,$salt): string
+    public function encrypt($plaintext,$chiperPass,$salt): string
     {   
-        $key = KeyGenerator::generateKey($password,$salt);
+        $key = KeyGenerator::generateKey($chiperPass,$salt);
       
         if ($plaintext === null) return null;
         
