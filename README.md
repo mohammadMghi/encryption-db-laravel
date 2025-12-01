@@ -13,24 +13,24 @@ This is a package for encrypting your data in the database and give a key to use
 First add ``` use Encryptable ``` to your eloquent model
 
 ```
-        $user = User::first();
-        $generated_key = KeyGenerator::generateKey($user->password);
+$user = User::first();
+$generated_key = KeyGenerator::generateKey($user->password);
          
-        $key = json_decode(Storage::get('temp.json') , true);
+$key = json_decode(Storage::get('temp.json') , true);
         
-        if (!isset($key["key"])) { 
-            Storage::put('temp.json' , json_encode(
-                ["key" => base64_encode($generated_key)]
-            ));
-        }   
+if (!isset($key["key"])) { 
+    Storage::put('temp.json' , json_encode(
+            ["key" => base64_encode($generated_key)]
+        ));
+    }   
          
-        KeyManager::set($key["key"]);
+KeyManager::set($key["key"]);
 
-        $order = new Order();
-        $order->address = "MyAddress";
-        $order->save(); 
+$order = new Order();
+$order->address = "MyAddress";
+$order->save(); 
 
-        $order = Order::first();
+$order = Order::first();
 
-        dd($order->address);
+dd($order->address);
 ```
