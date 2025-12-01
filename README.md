@@ -5,6 +5,11 @@
 If you want to give a unique token to each user and they only can access their data and you don't want to have access to users data this package is for you.
 This is a package for encrypting your data in the database and generate a key for each user and decrypting own data and only accessible with the key.
 
+## Install with composer
+
+``` composer require whitestarcode/encryptiondb ```
+
+
 ## توضیحات
 شما می توانید با این پکیج به هر کاربر یک توکن منحصر به فرد بدهید و فقط کاربر با آن توکن بتواند دیتا خودش را رمزگشایی کند
 
