@@ -2,9 +2,6 @@
 
 namespace WhiteStarCode\DbCipher\Crypto;
 
-use RuntimeException;
-
-
 class KeyGenerator
 {   
     public static function generateKey(string $password): string

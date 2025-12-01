@@ -7,3 +7,30 @@ This is a package for encrypting your data in the database and give a key to use
 
 ## توضیحات
 شما می توانید با این پکیج به هر کاربر یک توکن منحصر به فرد بدهید و فقط کاربر با آن توکن بتواند دیتا خودش را رمزگشایی کند
+
+## How to use
+
+First add ``` use Encryptable ``` to your eloquent model
+
+```
+        $user = User::first();
+        $generated_key = KeyGenerator::generateKey($user->password);
+         
+        $key = json_decode(Storage::get('temp.json') , true);
+        
+        if (!isset($key["key"])) { 
+            Storage::put('temp.json' , json_encode(
+                ["key" => base64_encode($generated_key)]
+            ));
+        }   
+         
+        KeyManager::set($key["key"]);
+
+        $order = new Order();
+        $order->address = "MyAddress";
+        $order->save(); 
+
+        $order = Order::first();
+
+        dd($order->address);
+```
