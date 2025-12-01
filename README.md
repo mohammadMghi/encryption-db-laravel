@@ -20,17 +20,23 @@ $key = json_decode(Storage::get('temp.json') , true);
         
 if (!isset($key["key"])) { 
     Storage::put('temp.json' , json_encode(
-            ["key" => base64_encode($generated_key)]
-        ));
-    }   
+        ["key" => base64_encode($generated_key)]
+    ));
+}   
          
 KeyManager::set($key["key"]);
 
+$address_bidx = BlindIndexService::make("My address");
+
 $order = new Order();
-$order->address = "MyAddress";
+$order->address = "My address";
+$order->address_bidx = $address_bidx;
 $order->save(); 
 
-$order = Order::first();
+$order = Order::first(); 
 
-dd($order->address);
+
+$address_search = BlindIndexService::make("My address");
+
+$order = Order::where("address_bidx" , $address_search)->first();
 ```
