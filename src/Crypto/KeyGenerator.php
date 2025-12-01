@@ -7,8 +7,10 @@ use RuntimeException;
 
 class KeyGenerator
 {   
-    public static function generateKey(string $password, string $salt): string
+    public static function generateKey(string $password): string
     {
+        $salt = random_bytes(SODIUM_CRYPTO_PWHASH_SALTBYTES); 
+
         $key = sodium_crypto_pwhash(
             32,
             $password,

@@ -5,16 +5,19 @@ namespace WhiteStarCode\DbCipher\Crypto;
 class KeyManager
 {
     protected static $key = null;
-    protected static $salt = null;
 
-    public static function set($key, $salt)
+    public static function set($key)
     {
-        self::$key = $key;
-        self::$salt = $salt;
+        self::$key = $key; 
     }
 
     public static function get()
     {
-        return [self::$key, self::$salt];
+        return [self::$key];
+    }
+
+    public static function clear()
+    {
+        self::$key = null;
     }
 }

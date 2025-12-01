@@ -10,9 +10,8 @@ trait Encryptable
     public function setAttribute($key,$value)
     { 
         if (in_array($key , $this->encryptable)) {
-            [$password , $salt] = KeyManager::get();
-
-            $value = Encryption::encrypt($value,$password,$salt);
+            [$chiper_key] = KeyManager::get();
+            $value = Encryption::encrypt($value,$chiper_key);
         }
         
         return parent::setAttribute($key,$value);
@@ -21,20 +20,14 @@ trait Encryptable
     public function getAttribute($key)
     {
         $value = parent::getAttribute($key);
-
+    
         if (in_array($key , $this->encryptable))
         {
-            [$password , $salt] = KeyManager::get();
+            [$key] = KeyManager::get();
 
-            return Encryption::decrypt($value,$password,$salt);
+            return Encryption::decrypt($value,$key);
         }
 
         return $value;
-    }
-
-    public function setEncryptable($chiperPass,$salt)
-    {
-        $this->chiperPass = $chiperPass;
-        $this->salt = $salt;
     }
 }

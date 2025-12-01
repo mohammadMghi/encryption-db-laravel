@@ -6,10 +6,10 @@ use WhiteStarCode\DbCipher\Crypto\KeyGenerator;
 
 class EncryptionService
 {
-    public function encrypt($plaintext,$chiperPass,$salt): string
-    {   
-        $key = KeyGenerator::generateKey($chiperPass,$salt);
-      
+    public function encrypt($plaintext,$key): string
+    {    
+        $key = base64_decode($key);
+
         if ($plaintext === null) return null;
         
         $nonce = random_bytes(SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
@@ -17,16 +17,16 @@ class EncryptionService
         return base64_encode($nonce . $cipher); 
     }
 
-    public function decrypt($ciphertext,$password,$salt): string
-    {
-         if ($ciphertext === null) return null;
+    public function decrypt($ciphertext,$key): string
+    { 
+        $key = base64_decode($key);
+ 
+        if ($ciphertext === null) return null;
         $decoded = base64_decode($ciphertext, true);
         if ($decoded === false) return null;
         $nonceLen = SODIUM_CRYPTO_SECRETBOX_NONCEBYTES;
         $nonce = substr($decoded, 0, $nonceLen);
         $cipher = substr($decoded, $nonceLen);
-
-        $key = KeyGenerator::generateKey($password,$salt);
 
         $plain = sodium_crypto_secretbox_open($cipher, $nonce, $key);
         if ($plain === false) {
