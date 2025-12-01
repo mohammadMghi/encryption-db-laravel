@@ -2,8 +2,8 @@
 
 ## description
 
-If you want to give a unique token to each user and they only can access their data and you want to don't have access to users data this package is for you.
-This is a package for encrypting your data in the database and give a key to users for decrypting own data.
+If you want to give a unique token to each user and they only can access their data and you don't want to have access to users data this package is for you.
+This is a package for encrypting your data in the database and generate a key for each user and decrypting own data and only accessible with the key.
 
 ## توضیحات
 شما می توانید با این پکیج به هر کاربر یک توکن منحصر به فرد بدهید و فقط کاربر با آن توکن بتواند دیتا خودش را رمزگشایی کند
@@ -12,6 +12,10 @@ This is a package for encrypting your data in the database and give a key to use
 
 First add ``` use Encryptable ``` to your eloquent model
 
+For each column you want to encrypt creating a bird for example ``` address_bidx ``` it helps you when you want to ``` where ``` on your columns to find it.
+It need because ``` BlindIndexService::make("My address") ``` generate a one way hash(same input same out put) then when you ``` where ``` on your columns it checks out-put with stored hash.
+
+## Example usage
 ```
 $user = User::first();
 $generated_key = KeyGenerator::generateKey($user->password);
