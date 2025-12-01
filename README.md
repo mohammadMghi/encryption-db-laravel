@@ -9,7 +9,6 @@ This is a package for encrypting your data in the database and generate a key fo
 
 ``` composer require whitestarcode/encryptiondb ```
 
-
 ## توضیحات
 شما می توانید با این پکیج به هر کاربر یک توکن منحصر به فرد بدهید و فقط کاربر با آن توکن بتواند دیتا خودش را رمزگشایی کند
 
@@ -19,6 +18,8 @@ First add ``` use Encryptable ``` to your eloquent model
 
 For each column you want to encrypt creating a bird for example ``` address_bidx ``` it helps you when you want to ``` where ``` on your columns to find it.
 It need because ``` BlindIndexService::make("My address") ``` generate a one way hash(same input same out put) then when you ``` where ``` on your columns it checks out-put with stored hash.
+
+Add ``` use Encryptable ``` to your model.
 
 ## Example usage
 ```
