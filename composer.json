@@ -20,5 +20,13 @@
                 "Encryption": "WhiteStarCode\\DbCipher\\Facades\\Encryption"
             }
         }
+    },
+  "require-dev": {
+    "orchestra/testbench": "^9.15"
+  },
+  "autoload-dev": {
+    "psr-4": {
+        "Vendor\\Package\\Tests\\": "tests/"
     }
+  }
 }
